@@ -73,7 +73,7 @@
 /* #undef HAVE_JASPER */
 
 /* IJG JPEG codec */
-/* #undef HAVE_JPEG */
+#define HAVE_JPEG
 
 /* libpng/png.h needs to be included */
 /* #undef HAVE_LIBPNG_PNG_H */

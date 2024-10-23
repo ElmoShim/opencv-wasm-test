@@ -19,7 +19,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS zlib libopenjp2 libprotobuf opencv_core opencv_flann opencv_imgproc opencv_photo opencv_dnn opencv_features2d opencv_imgcodecs opencv_calib3d opencv_objdetect opencv_video)
+foreach(_cmake_expected_target IN ITEMS zlib libjpeg-turbo libopenjp2 libprotobuf opencv_core opencv_flann opencv_imgproc opencv_photo opencv_dnn opencv_features2d opencv_imgcodecs opencv_calib3d opencv_objdetect opencv_video)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -57,6 +57,9 @@ endif()
 
 # Create imported target zlib
 add_library(zlib STATIC IMPORTED)
+
+# Create imported target libjpeg-turbo
+add_library(libjpeg-turbo STATIC IMPORTED)
 
 # Create imported target libopenjp2
 add_library(libopenjp2 STATIC IMPORTED)
@@ -115,7 +118,7 @@ set_target_properties(opencv_features2d PROPERTIES
 add_library(opencv_imgcodecs STATIC IMPORTED)
 
 set_target_properties(opencv_imgcodecs PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:libopenjp2>"
+  INTERFACE_LINK_LIBRARIES "opencv_core;opencv_imgproc;opencv_core;opencv_imgproc;\$<LINK_ONLY:libjpeg-turbo>;\$<LINK_ONLY:libopenjp2>"
 )
 
 # Create imported target opencv_calib3d

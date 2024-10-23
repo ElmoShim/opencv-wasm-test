@@ -15,6 +15,16 @@ set_target_properties(zlib PROPERTIES
 list(APPEND _cmake_import_check_targets zlib )
 list(APPEND _cmake_import_check_files_for_zlib "${_IMPORT_PREFIX}/lib/opencv4/3rdparty/libzlib.a" )
 
+# Import target "libjpeg-turbo" for configuration "Release"
+set_property(TARGET libjpeg-turbo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(libjpeg-turbo PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/opencv4/3rdparty/liblibjpeg-turbo.a"
+  )
+
+list(APPEND _cmake_import_check_targets libjpeg-turbo )
+list(APPEND _cmake_import_check_files_for_libjpeg-turbo "${_IMPORT_PREFIX}/lib/opencv4/3rdparty/liblibjpeg-turbo.a" )
+
 # Import target "libopenjp2" for configuration "Release"
 set_property(TARGET libopenjp2 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(libopenjp2 PROPERTIES

@@ -7,6 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(OpenCV REQUIRED
             COMPONENTS
             core
+            imgproc
             imgcodecs)
 
 
@@ -43,6 +44,7 @@ list(APPEND emscripten_link_options
     "SHELL:-s EXPORT_ES6=1"
     "SHELL:-s EXPORT_NAME=managerModule"
     "SHELL:-s EXPORTED_RUNTIME_METHODS=['FS']"
+    "SHELL:-s ALLOW_MEMORY_GROWTH=1"
 )
 
 set(emscripten_debug_options)
