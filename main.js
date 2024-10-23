@@ -15,8 +15,6 @@ let main = async ()=>{
     let array = new Uint8ClampedArray(width * height * 4);
     
     CVManager.ImportByArray(array, width, height, channel);
-
-
 }
 
 main();
