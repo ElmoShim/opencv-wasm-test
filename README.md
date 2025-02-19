@@ -1,4 +1,4 @@
-# Requiorements
+# Requirements
 - Docker
 - Python (optional)
 

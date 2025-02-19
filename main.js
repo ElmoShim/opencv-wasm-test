@@ -53,13 +53,10 @@ let main = async ()=>{
     let end = new Date()
     console.log("elapsed : ", (end - start) / 1000, "seconds" );
 
-
-
     // case2 : Write file by wasm FS, and read from cpp
     let res = await fetch(image.src)
     let blob = await res.blob();
 
-    console.log(blob);
     const uint8_view = await read_file(blob)
     start = new Date()
     await app.FS.writeFile("test.png", uint8_view);
