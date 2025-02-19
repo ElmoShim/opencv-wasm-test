@@ -1,8 +1,8 @@
 #include "cvmanager.h"
 #include <iostream>
 #include <opencv2/core/utility.hpp>
-#include <opencv2/imgcodecs/imgcodecs.hpp>
-#include "opencv2/imgproc.hpp"
+#include <opencv2>
+// #include <opencv2/imgproc.hpp>
 
 CVManager::CVManager(){
     std::cout << "Build with opencv" << std::endl;

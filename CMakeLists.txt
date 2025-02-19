@@ -99,6 +99,7 @@ target_include_directories(${CMAKE_PROJECT_NAME}
     ${OPENCV_CONFIG_FILE_INCLUDE_DIR}
     ${OPENCV_MODULE_opencv_core_LOCATION}/include
     ${OPENCV_MODULE_opencv_highgui_LOCATION}/include
+    ${OPENCV_MODULE_opencv_imgcodes_LOCATION}/include
 )
 
 # set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES)
