@@ -21,16 +21,12 @@ let onImport = async (e) =>{
     let image_file = e.target.files[0];
     
 
-    // let image_blob = new Blob([image_file], {type : 'image/jpeg'});
-    // console.log(image_blob)
-
-    // Write file to wasm 
+    // Write File From JS
     const uint8_view = await read_file(image_file);
-
     await app.FS.writeFile(image_file.name, uint8_view, {encoding : 'binary'});
-    // let status = app.FS.stat(image_file.name)
-    // console.log(status);
+    
 
+    // Read From CPP
     CVManager.ImportByFile(image_file.name);
     
 }
