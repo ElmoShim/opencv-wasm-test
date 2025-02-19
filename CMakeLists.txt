@@ -15,8 +15,6 @@ FetchContent_Declare(
     GIT_PROGRESS TRUE
 )
 
-
-set(CMAKE_BUILD_TYPE                    Release)
 set(CPU_DISPATCH                    '') 
 set(CV_TRACE                    OFF) 
 set(BUILD_SHARED_LIBS                    OFF) 
@@ -37,7 +35,7 @@ set(WITH_OPENGL                    OFF)
 set(WITH_OPENVX                    OFF) 
 set(WITH_OPENNI                    OFF) 
 set(WITH_OPENNI2                    OFF) 
-set(WITH_PNG                    OFF) 
+set(WITH_PNG                    ON) 
 set(WITH_TBB                    OFF) 
 set(WITH_TIFF                    OFF) 
 set(WITH_V4L                    OFF) 
@@ -91,15 +89,15 @@ add_executable(${CMAKE_PROJECT_NAME} cvmanager.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE
-    opencv_core opencv_highgui opencv_imgcodes
+    opencv_core opencv_imgcodecs
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}
     PRIVATE
     ${OPENCV_CONFIG_FILE_INCLUDE_DIR}
     ${OPENCV_MODULE_opencv_core_LOCATION}/include
-    ${OPENCV_MODULE_opencv_highgui_LOCATION}/include
-    ${OPENCV_MODULE_opencv_imgcodes_LOCATION}/include
+    ${OPENCV_MODULE_opencv_imgproc_LOCATION}/include
+    ${OPENCV_MODULE_opencv_imgcodecs_LOCATION}/include
 )
 
 # set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES)
@@ -116,6 +114,7 @@ list(APPEND emscripten_link_options
     "SHELL:-s MODULARIZE=1"  
     "SHELL:-s WASM=1"
     "SHELL:-s EXPORT_ES6=1"
+    "SHELL:-s ALLOW_MEMORY_GROWTH=1"
     "SHELL:-s EXPORT_NAME=managerModule"
     "SHELL:-s EXPORTED_RUNTIME_METHODS=['FS']"
 )
