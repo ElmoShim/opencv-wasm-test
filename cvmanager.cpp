@@ -21,7 +21,7 @@ void CVManager::ImportByArray(emscripten::val array, int width, int height, int 
 void CVManager::ImportByFile(std::string filename){
 
 
-    cv::Mat image = cv::imread(filename.c_str(), cv::IMREAD_COLOR);
+    cv::Mat image = cv::imread(filename.c_str(), cv::IMREAD_UNCHANGED);
     if(image.empty()){
         std::cout << "something wrong with imagefile : " << filename <<  std::endl;        
         

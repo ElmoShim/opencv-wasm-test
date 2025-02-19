@@ -4,9 +4,7 @@ services :
       volumes : 
         - ./:/work
       working_dir: /work/build_wasm
-      command : cmake /work/ -G Ninja 
-              -DCMAKE_BUILD_TYPE=Release
-              -DOpenCV_DIR=/work/opencv/lib/cmake/opencv4
+      command : cmake /work/ -G Ninja -DCMAKE_BUILD_TYPE=Release
   make :
       image : dockcross/web-wasm:20241021-2e07fc0
       volumes:
@@ -17,4 +15,3 @@ services :
       depends_on:
         cmake:
           condition: service_completed_successfully
-  

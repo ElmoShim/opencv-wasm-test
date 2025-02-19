@@ -1,14 +1,86 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.17)
 project(util)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 
-find_package(OpenCV REQUIRED
-            COMPONENTS
-            core
-            imgproc
-            imgcodecs)
+# TODO : Add OpenCV
+include(FetchContent)
+
+FetchContent_Declare(
+    opencv
+    GIT_REPOSITORY https://github.com/opencv/opencv.git
+    GIT_TAG 4.6.0
+    GIT_SHALLOW TRUE
+    GIT_PROGRESS TRUE
+)
+
+
+set(CMAKE_BUILD_TYPE                    Release)
+set(CPU_DISPATCH                    '') 
+set(CV_TRACE                    OFF) 
+set(BUILD_SHARED_LIBS                    OFF) 
+set(WITH_1394                    OFF) 
+set(WITH_ADE                    OFF) 
+set(WITH_VTK                    OFF) 
+set(WITH_EIGEN                    OFF) 
+set(WITH_FFMPEG                    OFF)
+set(WITH_GSTREAMER                    OFF) 
+set(WITH_GTK                    OFF) 
+set(WITH_GTK_2_X                    OFF) 
+set(WITH_IPP                    OFF) 
+set(WITH_JASPER                    OFF) 
+set(WITH_JPEG                    ON)
+set(WITH_WEBP                    OFF) 
+set(WITH_OPENEXR                    OFF) 
+set(WITH_OPENGL                    OFF) 
+set(WITH_OPENVX                    OFF) 
+set(WITH_OPENNI                    OFF) 
+set(WITH_OPENNI2                    OFF) 
+set(WITH_PNG                    OFF) 
+set(WITH_TBB                    OFF) 
+set(WITH_TIFF                    OFF) 
+set(WITH_V4L                    OFF) 
+set(WITH_OPENCL                    OFF) 
+set(WITH_OPENCL_SVM                    OFF) 
+set(WITH_OPENCLAMDFFT                    OFF) 
+set(WITH_OPENCLAMDBLAS                    OFF) 
+set(WITH_GPHOTO2                    OFF) 
+set(WITH_LAPACK                    OFF) 
+set(WITH_ITT                    OFF) 
+set(WITH_QUIRC                    OFF) 
+set(BUILD_ZLIB                    ON) 
+set(BUILD_opencv_apps                    OFF) 
+set(BUILD_opencv_calib3d                    ON) 
+set(BUILD_opencv_dnn                    ON) 
+set(BUILD_opencv_features2d                    ON) 
+set(BUILD_opencv_flann                    ON) 
+set(BUILD_opencv_gapi                    OFF) 
+set(BUILD_opencv_ml                    OFF) 
+set(BUILD_opencv_photo                    ON) 
+set(BUILD_opencv_imgcodecs                    ON)
+set(BUILD_opencv_shape                    OFF) 
+set(BUILD_opencv_videoio                    OFF) 
+set(BUILD_opencv_videostab                    OFF) 
+set(BUILD_opencv_highgui                    OFF) 
+set(BUILD_opencv_superres                    OFF) 
+set(BUILD_opencv_stitching                    OFF) 
+set(BUILD_opencv_java                    OFF) 
+set(BUILD_opencv_js                    OFF) 
+set(BUILD_opencv_python2                    OFF) 
+set(BUILD_opencv_python3                    OFF) 
+set(BUILD_EXAMPLES                    OFF) 
+set(BUILD_PACKAGE                    OFF) 
+set(BUILD_TESTS                    OFF) 
+set(BUILD_PERF_TESTS                    ON)
+set(BUILD_DOCS                    OFF)
+set(WITH_PTHREADS_PF                    OFF)
+set(CV_ENABLE_INTRINSICS                    OFF)
+set(BUILD_WASM_INTRIN_TESTS                    OFF)
+
+FetchContent_MakeAvailable(opencv)
+
+# find_package(OpenCV REQUIRED)
 
 
 # -----------------------------------------------------------------------------
@@ -19,13 +91,14 @@ add_executable(${CMAKE_PROJECT_NAME} cvmanager.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE
-    ${OpenCV_LIBS}
+    opencv_core opencv_highgui opencv_imgcodes
 )
-
 
 target_include_directories(${CMAKE_PROJECT_NAME}
     PRIVATE
-    ${OpenCV_INCLUDE_DIRS}
+    ${OPENCV_CONFIG_FILE_INCLUDE_DIR}
+    ${OPENCV_MODULE_opencv_core_LOCATION}/include
+    ${OPENCV_MODULE_opencv_highgui_LOCATION}/include
 )
 
 # set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED YES)
@@ -44,7 +117,6 @@ list(APPEND emscripten_link_options
     "SHELL:-s EXPORT_ES6=1"
     "SHELL:-s EXPORT_NAME=managerModule"
     "SHELL:-s EXPORTED_RUNTIME_METHODS=['FS']"
-    "SHELL:-s ALLOW_MEMORY_GROWTH=1"
 )
 
 set(emscripten_debug_options)
